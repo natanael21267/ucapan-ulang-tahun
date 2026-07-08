@@ -1,0 +1,684 @@
+/* ==========================================
+   RESET & BASE STYLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    background: radial-gradient(circle at center, #1a0b2e 0%, #05010d 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background Efek Canvas */
+#starfield, #canvas-fx {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#canvas-fx {
+    z-index: 999; /* Untuk confetti/kembang api di depan */
+}
+
+/* ==========================================
+   THEME STYLE: GLASSMORPHISM & NEON
+   ========================================== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+    transform: skewX(-25deg);
+    transition: 0.75s;
+}
+
+.glass-card:hover::before {
+    left: 125%;
+}
+
+.glow-text {
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.6), 0 0 20px rgba(138, 43, 226, 0.4);
+}
+
+/* ==========================================
+   1. LOADING SCREEN
+   ========================================== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #05010d;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.heart-logo {
+    font-size: 4rem;
+    animation: heartBeat 1.2s infinite;
+}
+
+.progress-bar-container {
+    width: 250px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff1493, #8a2be2);
+    box-shadow: 0 0 10px #ff1493;
+    transition: width 0.1s linear;
+}
+
+/* ==========================================
+   COMPONENTS: BUTTONS & ARRAYS
+   ========================================== */
+.ripple-btn {
+    position: relative;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(45deg, #ff1493, #8a2be2);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.ripple-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
+}
+
+.ripple-span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+
+/* Floating Music Player */
+#music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+}
+
+#music-player button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* ==========================================
+   2. WELCOME SECTION
+   ========================================== */
+main {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.hero-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+.moon {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: #fffdf6;
+    border-radius: 50%;
+    box-shadow: 0 0 40px 10px rgba(255, 253, 246, 0.3);
+}
+
+.hero-content {
+    text-align: center;
+    padding: 50px 40px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.for-text {
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.name-text {
+    font-size: 2.2rem;
+    color: #ff69b4;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Global Content Hiding System */
+.hidden-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.show-section {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* ==========================================
+   3. GIFT BOX
+   ========================================== */
+#gift-section {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gift-container {
+    text-align: center;
+}
+
+.gift-box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.gift-box:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.gift-lid {
+    position: absolute;
+    width: 160px;
+    height: 40px;
+    top: 0;
+    left: -5px;
+    background: #ff1493;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gift-body {
+    position: absolute;
+    width: 150px;
+    height: 120px;
+    bottom: 0;
+    background: #8a2be2;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Box Open Animation Modifier */
+.gift-box.open .gift-lid {
+    transform: translateY(-80px) rotate(-20px);
+    opacity: 0;
+}
+
+.gift-hint {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    animation: bounce 2s infinite;
+}
+
+/* ==========================================
+   4 & 5. HAPPY BIRTHDAY & LOVE LETTER
+   ========================================== */
+#letter-section {
+    min-height: 100vh;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.heading-large {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    height: 30px;
+    margin-bottom: 50px;
+}
+
+.letter-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.love-letter-card {
+    min-height: 300px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    z-index: 5;
+    transition: opacity 0.5s ease;
+}
+
+.envelope-front i {
+    font-size: 4rem;
+    color: #ff1493;
+}
+
+.envelope-inside {
+    padding: 30px;
+    text-align: left;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.5s ease;
+}
+
+/* Open Letter Class */
+.love-letter-card.open .envelope-front {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.love-letter-card.open .envelope-inside {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.letter-text {
+    line-height: 1.8;
+    font-size: 1rem;
+    white-space: pre-line;
+}
+
+/* ==========================================
+   6. GALLERY OVERVIEW
+   ========================================== */
+#gallery-section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #ff69b4;
+    text-shadow: 0 0 8px rgba(255,105,180,0.4);
+}
+
+.slider-container {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.slider-wrapper {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+    gap: 20px;
+}
+
+.slide {
+    flex: 0 0 calc(33.333% - 14px);
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.slide:hover {
+    transform: scale(1.03) translateY(-5px);
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev-btn { left: -15px; }
+.next-btn { right: -15px; }
+
+/* Lightbox Preview */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(5, 1, 13, 0.95);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: #fff; font-size: 3rem; cursor: pointer;
+}
+
+/* ==========================================
+   7. TIMELINE STRUCTURE
+   ========================================== */
+#timeline-section {
+    padding: 80px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline {
+    position: relative;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, #ff1493, #8a2be2);
+    top: 0; bottom: 0; left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item::after {
+    content: '❤️';
+    position: absolute;
+    width: 20px; height: 20px;
+    right: -13px; top: 20px;
+    z-index: 1; font-size: 14px;
+}
+
+.right::after { left: -7px; }
+
+.left { left: 0; }
+.right { left: 50%; }
+
+.timeline-content {
+    padding: 25px;
+}
+
+/* ==========================================
+   8. 100 REASONS GRID
+   ========================================== */
+#reasons-section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.reason-card {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.reason-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 20, 147, 0.4);
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.15);
+}
+
+.reason-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff1493;
+}
+
+/* ==========================================
+   9. COUNTDOWN
+   ========================================== */
+#countdown-section {
+    padding: 80px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.countdown-box span {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0,255,255,0.4);
+}
+
+/* ==========================================
+   10. QUOTES AREA
+   ========================================== */
+#quotes-section {
+    padding: 60px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.quotes-container {
+    padding: 40px;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* ==========================================
+   11 & 12. ENDING STYLES
+   ========================================== */
+#ending-section {
+    padding: 120px 20px;
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ending-text {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+}
+
+/* ==========================================
+   SCROLL REVEAL MECHANISM
+   ========================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mouse Trail Pointer */
+#mouse-trail {
+    width: 8px; height: 8px;
+    background: #ff1493;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 100001;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #ff1493;
+}
+
+/* ==========================================
+   ANIMATIONS KEYFRAMES
+   ========================================== */
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.2); }
+    40% { transform: scale(1.1); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes rippleEffect {
+    to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================== */
+@media (max-width: 992px) {
+    .slide { flex: 0 0 calc(50% - 10px); }
+    .ending-text { font-size: 2.8rem; }
+}
+
+@media (max-width: 768px) {
+    .timeline::after { left: 31px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
+    .timeline-item.right { left: 0; }
+    .timeline-item.left::after, .timeline-item.right::after { left: 22px; }
+    .heading-large { font-size: 2.2rem; }
+}
+
+@media (max-width: 576px) {
+    .slide { flex: 0 0 100%; }
+    .countdown-container { flex-wrap: wrap; gap: 20px; }
+    .countdown-box { flex: 0 0 45%; }
+    .hero-content h1 { font-size: 2rem; }
+    .name-text { font-size: 1.8rem; }
+}

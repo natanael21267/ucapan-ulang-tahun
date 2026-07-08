@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun, Sayang! ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+    <canvas id="canvas-fx"></canvas>
+    <div id="mouse-trail"></div>
+
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="heart-logo">❤️</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p>Menyiapkan kejutan spesial...</p>
+        </div>
+    </div>
+
+    <div id="music-player" class="glass-card hidden">
+        <button id="btn-play-pause"><i class="fas fa-play"></i></button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7">
+    </div>
+
+    <main id="main-content" class="blur-content">
+
+        <section id="welcome-section" class="hero-section">
+            <div class="moon"></div>
+            <div class="hero-content glass-card animate-fade-in">
+                <h1 class="glow-text">Happy Birthday ❤️</h1>
+                <p class="for-text">Untuk</p>
+                <h2 class="name-text"></h2>
+                <button id="btn-open-gift" class="ripple-btn"><i class="fas fa-gift"></i> Buka Hadiah</button>
+            </div>
+        </section>
+
+        <div id="locked-content" class="hidden-section">
+
+            <section id="gift-section" class="scroll-reveal">
+                <div class="gift-container">
+                    <div class="gift-box" id="main-gift-box">
+                        <div class="gift-lid"></div>
+                        <div class="gift-body"></div>
+                    </div>
+                    <p class="gift-hint">Klik kotak untuk membuka hadiah spesialmu ✨</p>
+                </div>
+            </section>
+
+            <section id="letter-section" class="scroll-reveal">
+                <h1 class="heading-large glow-text">Happy Birthday, Sayang!</h1>
+                <p id="typing-subtitle" class="subtitle"></p>
+                
+                <div class="letter-container">
+                    <div class="love-letter-card" id="love-letter">
+                        <div class="envelope-front">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <p>Klik untuk Membaca Surat</p>
+                        </div>
+                        <div class="envelope-inside glass-card">
+                            <div class="letter-text">
+                                <p id="typing-letter"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery-section" class="scroll-reveal">
+                <h2 class="section-title"><i class="fas fa-images"></i> Galeri Kenangan Kita</h2>
+                <div class="slider-container glass-card">
+                    <div class="slider-wrapper" id="slider-wrapper">
+                        <div class="slide"><img src="assets/photo1.JPG" alt="Kenangan 1" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo2.jpg" alt="Kenangan 2" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo3.jpg" alt="Kenangan 3" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo4.jpg" alt="Kenangan 4" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo5.jpg" alt="Kenangan 5" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo6.jpg" alt="Kenangan 6" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo7.jpeg" alt="Kenangan 7" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo8.jpg" alt="Kenangan 8" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo9.jpg" alt="Kenangan 8" class="gallery-img"></div>
+                        <div class="slide"><img src="assets/photo10.jpg" alt="Kenangan 8" class="gallery-img"></div>
+                    </div>
+                    <button class="slider-btn prev-btn" id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next-btn" id="next-slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <div id="lightbox" class="lightbox">
+                <span class="close-lightbox">&times;</span>
+                <img class="lightbox-content" id="lightbox-img">
+            </div>
+
+           <section id="timeline-section" class="scroll-reveal">
+    <h2 class="section-title"><i class="fas fa-history"></i> Cerita Perjalanan Kita</h2>
+    <div class="timeline">
+        
+        <!-- ITEM 1 -->
+        <div class="timeline-item left">
+            <div class="timeline-content glass-card">
+                <h3>Pertama Kenalan</h3>
+                <p>Jujur, awal perkenalan kita mungkin terasa kurang baik dan sedikit canggung. Berawal dari urusan organisasi yang membuatku jadi sering berkunjung ke kosanmu, siapa sangka momen-momen biasa itu justru menjadi babak pembuka dari kedekatan kita.</p>
+            </div>
+        </div>
+        
+        <!-- ITEM 2 -->
+        <div class="timeline-item right">
+            <div class="timeline-content glass-card">
+                <h3>Pertama Jalan</h3>
+                <p>Awalnya cuma berawal dari keisengan dan sembunyi-sembunyi dari orang lain. Dari dua orang yang sama-sama dilanda gabut, kita memutuskan untuk nekat pergi ke Meikarta. Hari itu menjadi titik balik di mana aku mulai melihatmu dengan cara yang berbeda.</p>
+            </div>
+        </div>
+        
+        <!-- ITEM 3 -->
+        <div class="timeline-item left">
+            <div class="timeline-content glass-card">
+                <h3>Jadian ❤️</h3>
+                <p>Hari di mana kita akhirnya berani mengambil langkah besar untuk saling melengkapi. berkomitmen menghadapi segala musim kehidupan bersama, dan menjadikan hatimu sebagai tempatku pulang.</p>
+            </div>
+        </div>
+        
+        <!-- ITEM 4 -->
+        <div class="timeline-item right">
+            <div class="timeline-content glass-card">
+                <h3>Liburan Bareng</h3>
+                <p>Menjelajahi tempat-tempat baru, mengukir tawa lepas tanpa beban, dan mengumpulkan setiap potongan memori indah. Setiap perjalanan bersamamu selalu menegaskan satu hal: bukan tentang ke mana kita pergi, tapi tentang dengan siapa aku menghabiskan waktu.</p>
+            </div>
+        </div>
+        
+        <!-- ITEM 5 -->
+        <div class="timeline-item left">
+            <div class="timeline-content glass-card">
+                <h3>Hari Ini dan Seterusnya</h3>
+                <p>Selamat ulang tahun, Sayang. Terima kasih telah bertahan dan menjadi bagian terindah dalam hidupku. Mari kita hadapi hari esok, hari-hari setelahnya, hingga masa depan nanti dengan tetap saling bergandengan tangan. Aku menyayangimu.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+            <section id="reasons-section" class="scroll-reveal">
+                <h2 class="section-title"><i class="fas fa-heart"></i> Alasan Kenapa Aku Sayang Kamu</h2>
+                <div class="reasons-grid" id="reasons-grid">
+                    </div>
+            </section>
+
+            <section id="countdown-section" class="scroll-reveal">
+                <h2 class="section-title"><i class="fas fa-hourglass-half"></i> Waktu yang Telah Kita Lalui</h2>
+                <div class="countdown-container glass-card">
+                    <div class="countdown-box">
+                        <span id="count-days">0</span>
+                        <p>Hari</p>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="count-hours">0</span>
+                        <p>Jam</p>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="count-minutes">0</span>
+                        <p>Menit</p>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="count-seconds">0</span>
+                        <p>Detik</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quotes-section" class="scroll-reveal">
+                <div class="quotes-container glass-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p id="quote-text">Kamu adalah ketidakpastian yang paling aku perjuangkan.</p>
+                </div>
+            </section>
+
+            <section id="ending-section" class="scroll-reveal">
+                <h1 class="ending-text glow-text">I LOVE YOU FOREVER ❤️</h1>
+                <button id="btn-hug" class="ripple-btn"><i class="fas fa-hand-holding-heart"></i> Hug Me ❤️</button>
+            </section>
+        </div>
+    </main>
+
+    <audio id="birthday-audio" src="assets/music.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
